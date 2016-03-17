@@ -1,3 +1,5 @@
+//This code is largely a rewrite of the original Jquery code into vanilla Javascript. 
+//Main purpose is to become familiar with Javascript syntax
 document.addEventListener('DOMContentLoaded', function () {
 	"use strict";
 
