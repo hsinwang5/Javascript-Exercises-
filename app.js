@@ -92,4 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 	}
+	//trigger click on newest tab to populate initial list
+	var newest = document.querySelector(".tabs span");
+	newest.click();
 });
