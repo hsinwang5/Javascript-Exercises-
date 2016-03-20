@@ -1,5 +1,4 @@
-//This code is largely a rewrite of the original Jquery code into vanilla Javascript. 
-//Main purpose is to become familiar with Javascript syntax
+//javascript version - does not require loading Jquery
 document.addEventListener('DOMContentLoaded', function () {
 	"use strict";
 
@@ -26,9 +25,20 @@ document.addEventListener('DOMContentLoaded', function () {
 			button[0].remove();
 		} else return;
 	}
+	//clear all list elements when tab is clicked
+	function clearAll() {
+		var elem = document.querySelectorAll(".content li");
+		for (var i = 0; i < elem.length; i++) {
+			elem[i].remove();
+		}
+	}
 	//Add event listener to all 3 tabs, delete current active and make the clicked tab active
 	for (tabNumber = 0; tabNumber <= 2; tabNumber++) {
 		tabs[tabNumber].addEventListener("click", function (event) {
+			clearAll();
+			removeInput();
+			//The for loop is required in JS version because the tabs variable returns a nodelist,
+			//while .classList requires a DOM element. Tabs[i] returns the specified nodelist, but as a single DOM element
 			for (var i = 0; i < tabs.length; i++) {
 				tabs[i].classList.remove("active");
 			};
@@ -40,46 +50,25 @@ document.addEventListener('DOMContentLoaded', function () {
 			event.preventDefault();
 			//execute DOM changes in the tab that was clicked
 			if (tabs[0] == event.currentTarget) {
-				var elem = document.querySelectorAll(".content li");
-				//remove all list elements when tab is clicked
-				for (var i = 0; i < elem.length; i++) {
-					elem[i].remove();
-				}
-				//removes input from add tab if there is one
-				removeInput();
 				//dynamically recreate all list elements from toDos array
 				for (var i = toDos.length-1; i >= 0; i--) {
 					var node = document.createElement("li");
-					var textnode = document.createTextNode(toDos[i]);
-					node.appendChild(textnode);
-					ul[0].appendChild(node);
+					ul[0].appendChild(node).innerHTML = toDos[i];
 				}
 			}
 
 			if (tabs[1] == event.currentTarget) {
-				var elem = document.querySelectorAll(".content li");
-				for (var i = 0; i < elem.length; i++) {
-					elem[i].remove();
-				}
-				removeInput();
 				for (var i = 0; i < toDos.length; i++) {
 					var node = document.createElement("li");
-					var textnode = document.createTextNode(toDos[i]);
-					node.appendChild(textnode);
-					ul[0].appendChild(node);
+					ul[0].appendChild(node).innerHTML = toDos[i];
 				}
 			}
 			//create input text box and submit button dynamically
 			if (tabs[2] == event.currentTarget) {
-				var elem = document.querySelectorAll(".content li");
-				for (var i = 0; i < elem.length; i++) {
-					elem[i].remove();
-				}
 				var mainContent = document.querySelectorAll(".content ul");
 				var node = document.createElement("input");
 				var node2 = document.createElement("button");
-				var textnode = document.createTextNode("+");
-				node2.appendChild(textnode);
+				node2.innerHTML = "+";
 				mainContent[0].appendChild(node);
 				mainContent[0].appendChild(node2);
 				var submit = document.querySelectorAll(".content button");
@@ -94,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 	}
+
 	//trigger click on newest tab to populate initial list
 	var newest = document.querySelector(".tabs span");
 	newest.click();
