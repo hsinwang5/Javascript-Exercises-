@@ -32,7 +32,7 @@ var scrollImages = function(cycle, obj) {
 			return;
 		}
 		scrollImages(cycle, obj);
-	}, 500)
+	}, 2000)
 };
 
 $(document).ready(main);
