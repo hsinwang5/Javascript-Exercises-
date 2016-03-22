@@ -1,4 +1,4 @@
-//javascript version - does not require loading Jquery - Current up to chapter 4
+//javascript version - does not require loading Jquery
 document.addEventListener('DOMContentLoaded', function () {
 	"use strict";
 
