@@ -1,4 +1,4 @@
-//javascript version - does not require loading Jquery
+//pure javascript version - does not require loading Jquery - original Jquery version written by Semmy Purewal
 document.addEventListener('DOMContentLoaded', function () {
 	"use strict";
 
