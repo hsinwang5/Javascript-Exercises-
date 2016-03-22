@@ -1,6 +1,6 @@
 //optional exercise: Create a website that retrieves images from Flickr when the user 
 //submits a search term, and scroll through the images sequentially. 
-var isTimeoutRunning;
+var timeoutID;
 
 var main = function() {
 	var url = "http://api.flickr.com/services/feeds/photos_public.gne?tags=";
@@ -12,7 +12,7 @@ var main = function() {
 	var buttonPressed = false;
 
 	button.addEventListener("click", function(event) {
-		window.clearTimeout(isTimeoutRunning);
+		window.clearTimeout(timeoutID);
 		var value;
 		value = input.value;
 		$.getJSON((url + input.value + end), function(flickrResponse){
@@ -24,8 +24,7 @@ var main = function() {
 var scrollImages = function(cycle, obj) {
 	var imgsrc = document.querySelector("body img");
 	imgsrc.setAttribute("src", obj.items[cycle].media.m);	
-	isTimeoutRunning = setTimeout(function() {
-		console.log(isTimeoutRunning);
+	timeoutID = setTimeout(function() {
 		cycle += 1;
 		if (cycle === obj.items.length) {
 			console.log("end reached");
