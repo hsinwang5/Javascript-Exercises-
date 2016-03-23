@@ -4,7 +4,7 @@
 var main = function () {
 	"use strict";
 	console.log("activated");
-	
+	//This hand contains Quads, the highest multi-card match rank possible in poker
 	var hand1 = [
 	{"rank": 3, "suit": "spades"},
 	{"rank": 3, "suit": "diamonds"},
@@ -12,7 +12,8 @@ var main = function () {
 	{"rank": 7, "suit": "hearts"},
 	{"rank": 3, "suit": "clubs"}
 	];
-
+	//11, 12, 13, and 14 are numerical representations of Jack, Queen, King, and Ace. 
+	//Note that in implementation of straights the 14 also counts as a one
 	var cardRanksArray = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 	var ranks = hand1.map(function (card) {
@@ -40,7 +41,7 @@ var main = function () {
 		return count;
 	}
 
-	//function returns true if the hand contains any pair
+	//function returns what type of hand you have
 	function pairType (hand) {
 		var pairFound = 0;
 		var tripsFound = 0;
