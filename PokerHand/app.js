@@ -67,6 +67,8 @@ var main = function () {
 					result = "high card";
 			} 
 		});
+		//QuadsFound and tripsFound isn't necessary here since you can just set result's string in switch,
+		//but it may make it more confusing to make changes later if it comes up
 		if (quadsFound === 1) {
 			result = "You have quads! Congrats!";
 		} else if (pairFound === 1 && tripsFound === 1) {
