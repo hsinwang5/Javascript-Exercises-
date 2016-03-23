@@ -1,6 +1,7 @@
 //This application takes in an array of 5 objects representing a poker hand, 
 //and returns what type of pair it is. 
 //Straights and flushes are not considered, but can be implemented using Math.max and Math.min
+//This file runs entirely on the console so only barebones html is needed.
 var main = function () {
 	"use strict";
 	console.log("activated");
