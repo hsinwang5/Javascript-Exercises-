@@ -4,21 +4,21 @@ var isTimeoutRunning;
 function main () {
 	var url = "http://api.flickr.com/services/feeds/photos_public.gne?tags=";
 	var end = "&format=json&jsoncallback=?";
-	var input = document.querySelector("body input");
+	var input = document.querySelectorAll("body input");
 	var button = document.querySelectorAll("body button");
 
 	button[0].addEventListener("click", function (event) {
 		window.clearTimeout(isTimeoutRunning);
-		$.getJSON((url + input.value + end), function (flickrResponse){
-			scrollImages(0, flickrResponse);
+		$.getJSON((url + input[0].value + end), function (flickrResponse){
+			scrollImages(0, flickrResponse, input[1].value);
 		});
 	});	
 
-	input.addEventListener("keydown", function (event) {
+	input[0].addEventListener("keydown", function (event) {
 		if (event.which === 13) {
 			window.clearTimeout(isTimeoutRunning);
 			$.getJSON((url + input.value + end), function (flickrResponse){
-			scrollImages(0, flickrResponse);
+			scrollImages(0, flickrResponse, input[1].value);
 		});
 		}
 	})
@@ -28,7 +28,7 @@ function main () {
 	});
 };
 
-function scrollImages (cycle, obj) {
+function scrollImages (cycle, obj, time) {
 	var imgsrc = document.querySelector("body img");
 	imgsrc.setAttribute("src", obj.items[cycle].media.m);	
 	isTimeoutRunning = setTimeout(function() {
@@ -39,9 +39,28 @@ function scrollImages (cycle, obj) {
 			cycle = 0;
 			return;
 		}
-		scrollImages(cycle, obj);
-	}, 500)
+		scrollImages(cycle, obj, time);
+	}, (time*1000))
 };
+
+function allowDrop (ev) {
+	ev.preventDefault ();
+}
+
+function onDragImage (ev) {
+	ev.dataTransfer.setData("text", ev.target.currentSrc);
+}
+
+function onDrop (ev) {
+	ev.preventDefault ();
+	var data = ev.dataTransfer.getData("text");
+	var clipboard = document.querySelector(".clipboard");
+	var img = document.createElement("img");
+	var eraseImg = document.querySelector("#drag");
+	img.setAttribute("src", data);
+	clipboard.appendChild(img);
+	eraseImg.setAttribute("src", "");
+}
 
 //---------------------------------------------------------------------------------------------------------------
 
