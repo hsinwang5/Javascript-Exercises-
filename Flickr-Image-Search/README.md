@@ -1,4 +1,1 @@
-Allows a user to input a search term to retrieve recently uploaded images by tag
-
-**allow user to pin images to a clipboard while searching through other tagged images
-**add option to change scroll timer
+Allows a user to input a search term to retrieve recently uploaded images by tag. If the user likes an image, they can click+drag the image over to a clipboard to pin it up permanently. The original img disppears but they can still search for more pictures and drag those in too. 
