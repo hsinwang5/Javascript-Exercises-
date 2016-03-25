@@ -6,4 +6,4 @@ Allows a user to input a search term to retrieve recently uploaded images by tag
 
 **todo: add detection for overflow so images don't go out of bounds of the clipboard. (done!)
 
-**todo: make clipboard scale in size to size of browser window (This would also introduce the problem of having to detect whether the resize causes an overflow since the overflow check is only done on-drop.
+**todo: make clipboard scale in size to size of browser window (This would also introduce the problem of having to detect whether the resize causes an overflow since the overflow check is only done on-drop.)
