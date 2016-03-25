@@ -1,0 +1,19 @@
+.clipboard {
+	border: 1px solid;
+	width: 500px;
+	height: 500px;
+	float: right;
+	margin-top: 25px;
+	margin-right: 5px;
+}
+
+.left {
+	max-width: 200px;
+	float: left;
+}
+
+.images {
+	width: 220px;
+	height: 250px;
+	
+}
