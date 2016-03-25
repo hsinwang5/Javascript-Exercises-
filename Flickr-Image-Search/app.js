@@ -59,7 +59,12 @@ function onDrop (ev) {
 	var eraseImg = document.querySelector("#drag");
 	img.setAttribute("src", data);
 	clipboard.appendChild(img);
-	eraseImg.setAttribute("src", "");
+	if (clipboard.offsetHeight < clipboard.scrollHeight) {
+		alert("Too many Images!");
+		img.remove();
+	} else {
+		eraseImg.setAttribute("src", "");
+	}
 }
 
 //---------------------------------------------------------------------------------------------------------------
