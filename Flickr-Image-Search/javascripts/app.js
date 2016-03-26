@@ -43,7 +43,29 @@ function scrollImages (cycle, obj, time) {
 	}, (time*1000))
 };
 
+function allowDrop (ev) {
+	ev.preventDefault ();
+}
 
+function onDragImage (ev) {
+	ev.dataTransfer.setData("text", ev.target.currentSrc);
+}
+
+function onDrop (ev) {
+	ev.preventDefault ();
+	var data = ev.dataTransfer.getData("text");
+	var clipboard = document.querySelector(".clipboard");
+	var img = document.createElement("img");
+	var eraseImg = document.querySelector("#drag");
+	img.setAttribute("src", data);
+	clipboard.appendChild(img);
+	if (clipboard.offsetHeight < clipboard.scrollHeight) {
+		alert("Too many Images!");
+		img.remove();
+	} else {
+		eraseImg.setAttribute("src", "");
+	}
+}
 
 //---------------------------------------------------------------------------------------------------------------
 
