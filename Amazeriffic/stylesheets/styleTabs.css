@@ -1,0 +1,161 @@
+//original version by Semmy Purewal
+html {
+	font-family: 'Droid Sans', sans-serif;
+	font-size: 100%;
+}
+
+a:link {
+	color: #FF0000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.tabs a:visited {
+	color: red;
+}
+
+p {
+	font-size: small;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.desc li {
+	font-size: small;
+}
+
+body {
+	background: #f9e933;
+}
+
+/*Change overflow to auto if it ends up missing scroll bars*/
+header {
+	background: white;
+	overflow: auto;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #000;
+
+}
+
+header .container nav {
+	padding-top: 15px;
+	font-weight: bold;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Ubuntu', sans-serif;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+h3 {
+	background: #ddd;
+	margin-bottom: 5px;
+	padding: 5px;
+	color: #999;
+	margin: 20px 0 10px 0;
+	border-radius: 5px;
+}
+
+h3:first-child {
+	margin-top: 0;
+}
+
+header h1 {
+	float: left;
+	width: 570px;
+	font-size: 3em;
+	font-style: italic;
+	color: 	#D00000; 
+	font-weight: bold;
+}
+
+h2 {
+	font-size: x-large;
+}
+
+header nav {
+	float: right;
+	width: 285px;
+}
+
+/*Change overflow to auto if it ends up missing scroll bars*/
+main {
+	background: white;
+	min-width: 855px;
+	min-height: 300px;
+	overflow: auto;
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+
+.tabs a span {
+	display: inline-block;
+	border-radius: 5px 5px 0 0;
+	width: 100px;
+	margin-right: 10px;
+	text-align: center;
+	background: #ddd;
+	padding: 5px;
+}
+
+.tabs a span.active {
+	background:  #eee;
+}
+
+.content {
+	background: #eee;
+	padding: 15px;
+}
+
+.content li {
+	padding: 7px;
+	background: #ccffff;
+	margin-bottom: 10px;
+}
+
+header, main, footer {
+	min-width: 855px;
+}
+
+header .container, main .container, footer .container {
+	max-width: 855px;
+	margin: auto;
+}
+
+footer {
+	padding-top: 20px;
+}
+
+footer .contact {
+	float: left;
+	width: 570px;
+}
+
+.footeramazeriffic {
+	color: #FF0000;
+}
+
+footer .sitemap {
+	float: right;
+	width: 285px;
+}
+
+.sitemap_container li {
+	padding-bottom: 2px;
+	padding-top: 2px;
+	font-size: .9em;
+}
+
+.sitemap_left {
+	float: left;
+	width: 142.5px;
+}
+
+.sitemap_right {
+	float: right;
+	width: 142.5px;
+}
