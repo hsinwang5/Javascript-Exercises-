@@ -48,8 +48,7 @@ function allowDrop (ev) {
 }
 
 function onDragImage (ev) {
-	console.log(ev.dataTransfer);
-	ev.dataTransfer.setData("text", ev.target.src);
+	ev.dataTransfer.setData("text", ev.target.currentSrc);
 }
 
 function onDrop (ev) {
@@ -60,7 +59,6 @@ function onDrop (ev) {
 	var eraseImg = document.querySelector("#drag");
 	img.setAttribute("src", data);
 	clipboard.appendChild(img);
-	
 	if (clipboard.offsetHeight < clipboard.scrollHeight) {
 		alert("Too many Images!");
 		img.remove();
