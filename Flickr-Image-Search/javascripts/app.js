@@ -47,12 +47,6 @@ function allowDrop (ev) {
 	ev.preventDefault ();
 }
 
-<<<<<<< HEAD
-=======
-function onDragImage (ev) {
-	ev.dataTransfer.setData("text", ev.target.currentSrc);
-}
->>>>>>> parent of 551ce8c... Cleaned up code
 
 function onDrop (ev) {
 	ev.preventDefault ();
@@ -62,6 +56,7 @@ function onDrop (ev) {
 	var eraseImg = document.querySelector("#drag");
 	img.setAttribute("src", data);
 	clipboard.appendChild(img);
+	
 	if (clipboard.offsetHeight < clipboard.scrollHeight) {
 		alert("Too many Images!");
 		img.remove();
