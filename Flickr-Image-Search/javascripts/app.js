@@ -44,6 +44,10 @@ function main () {
 	dragImg.addEventListener("mouseup", function () {
 		console.log("mouseup detected");
 		dragging = false;
+		//reset position if not in clipboard
+		dragImg.removeAttribute("id");
+		dragImg.style.top = "";
+		dragImg.style.left = "";
 	});
 };
 
