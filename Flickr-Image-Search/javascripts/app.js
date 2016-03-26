@@ -58,6 +58,7 @@ function onDrop (ev) {
 	var img = document.createElement("img");
 	var eraseImg = document.querySelector("#drag");
 	img.setAttribute("src", data);
+	img.setAttribute("draggable", "false");
 	clipboard.appendChild(img);
 	if (clipboard.offsetHeight < clipboard.scrollHeight) {
 		alert("Too many Images!");
