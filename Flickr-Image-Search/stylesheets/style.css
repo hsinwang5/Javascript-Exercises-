@@ -17,11 +17,3 @@
 	height: 250px;
 	
 }
-
-img {
-	cursor: move;
-}
-
-#drag {
-	position: absolute;
-}
