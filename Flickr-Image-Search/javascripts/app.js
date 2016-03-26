@@ -26,6 +26,25 @@ function main () {
 	button[1].addEventListener("click", function () {
 		window.clearTimeout(isTimeoutRunning);
 	});
+
+	//Draggable Image using custom Javascript code
+	var dragImg = document.querySelector(".images img");
+	var dragging = false;
+	dragImg.addEventListener("mousedown", function () {
+		console.log("mousedown detected " + dragImg.clientHeight);
+		dragImg.setAttribute("id", "drag");
+		dragging = true;
+	});
+	dragImg.addEventListener("mousemove", function (event) {
+		if (dragging) {
+			dragImg.style.top = (event.clientY - dragImg.clientHeight/2) + "px";
+			dragImg.style.left = (event.clientX - dragImg.clientWidth/2) + "px";
+		}
+	})
+	dragImg.addEventListener("mouseup", function () {
+		console.log("mouseup detected");
+		dragging = false;
+	});
 };
 
 function scrollImages (cycle, obj, time) {
@@ -43,7 +62,7 @@ function scrollImages (cycle, obj, time) {
 	}, (time*1000))
 };
 
-function allowDrop (ev) {
+/*function allowDrop (ev) {
 	ev.preventDefault ();
 }
 
@@ -66,7 +85,7 @@ function onDrop (ev) {
 	} else {
 		eraseImg.setAttribute("src", "");
 	}
-}
+}*/
 
 //---------------------------------------------------------------------------------------------------------------
 
