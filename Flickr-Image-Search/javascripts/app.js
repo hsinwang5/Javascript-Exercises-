@@ -47,14 +47,10 @@ function allowDrop (ev) {
 	ev.preventDefault ();
 }
 
-function onDragImage (ev) {
-	console.log(ev.dataTransfer);
-	ev.dataTransfer.setData("text", ev.target.src);
-}
 
 function onDrop (ev) {
 	ev.preventDefault ();
-	var data = ev.dataTransfer.getData("text");
+	var data = ev.dataTransfer.getData("text/plain");
 	var clipboard = document.querySelector(".clipboard");
 	var img = document.createElement("img");
 	var eraseImg = document.querySelector("#drag");
