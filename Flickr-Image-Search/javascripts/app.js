@@ -75,6 +75,7 @@ function main () {
 			var src = dragImg.getAttribute("src");
 			var newImg = document.createElement("img");
 			newImg.setAttribute("src", src);
+			newImg.setAttribute("draggable", "false");
 			clipboard.appendChild(newImg);
 			if (clipboard.offsetHeight < clipboard.scrollHeight) {
 				alert("Sorry, too many images!");
