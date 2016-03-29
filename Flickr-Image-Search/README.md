@@ -1,4 +1,4 @@
-Allows a user to input a search term to retrieve recently uploaded images by tag. If the user likes an image, they can click+drag the image over to a clipboard to pin it up permanently. The original img disppears but they can still search for more pictures and drag those in too. 
+Allows a user to input a search term to retrieve recently uploaded images by tag. If the user likes an image, they can click+drag the image over to a clipboard to pin it up permanently. The user still search for more pictures and drag those in too. They can remove pictures from the clipboard by dragging the pictures out. 
 
 **todo: HTML drag and drop kinda sucks...write a custom drag code so things make sense instead of having to hack the drag and drop api (done!)
 
