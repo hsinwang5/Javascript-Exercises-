@@ -1,6 +1,7 @@
 "use strict";
 var isTimeoutRunning;
 var dragging = false;
+var dragData;
 
 function main () {
 	var url = "http://api.flickr.com/services/feeds/photos_public.gne?tags=";
@@ -51,19 +52,22 @@ function main () {
 	clipboard.addEventListener("mouseup", function () {
 		if (dragging) {
 			clipboard.style.backgroundColor = "";
-			var src = dragImg.getAttribute("src");
+			var src = dragData.getAttribute("src");
 			var newImg = document.createElement("img");
 			newImg.setAttribute("src", src);
 			newImg.setAttribute("draggable", "false");
+			enableDragging(newImg, true);
 			clipboard.appendChild(newImg);
+			newImg.addEventListener("mousedown", function () {
+				clipboard.style.backgroundColor = "#BBCB00";
+			})
 			if (clipboard.offsetHeight < clipboard.scrollHeight) {
 				alert("Sorry, too many images!");
 				newImg.remove();
-			} else {
-				dragImg.setAttribute("src", "");
-			}
+			} 
 		}
 	});
+
 }
 
 //Utility and Helper Functions
@@ -85,16 +89,22 @@ function scrollImages (cycle, obj, time) {
 
 //Enables dragging of the element passed as the argument when mouse is clicked
 //This function makes use of a global draggable boolean variable
-function enableDragging (element) {
+function enableDragging (element, deleteSelf) {
 	console.log("enableDragging called");
 	element.addEventListener("mousedown", function (event) {
 		event.stopPropagation();
+		//allow Data transfer
+		dragData = element;
+		console.log("called");
 		window.clearTimeout(isTimeoutRunning);
 		element.setAttribute("id", "drag");
 		dragging = true;
 		document.addEventListener("mouseup", function documentMouseUp () {
 			dragging = false;
-			//reset position if not in clipboard
+			if (deleteSelf) {
+				element.setAttribute("src", "");
+			}
+			//reset position when mouseup
 			element.removeAttribute("id");
 			element.style.top = "";
 			element.style.left = "";
@@ -109,43 +119,6 @@ function enableDragging (element) {
 		}
 	});
 }
-
-/*
-
-function allowDrop (ev) {
-	ev.preventDefault ();
-}
-
-function onDragImage (ev) {
-	ev.dataTransfer.setData("text", ev.target.currentSrc);
-}
-
-function onDrop (ev) {
-	ev.preventDefault ();
-	var data = ev.dataTransfer.getData("text");
-	var clipboard = document.querySelector(".clipboard");
-	var img = document.createElement("img");
-	var eraseImg = document.querySelector("#drag");
-	img.setAttribute("src", data);
-	img.setAttribute("draggable", "false");
-	clipboard.appendChild(img);
-	if (clipboard.offsetHeight < clipboard.scrollHeight) {
-		alert("Too many Images!");
-		img.remove();
-	} else {
-		eraseImg.setAttribute("src", "");
-	}
-}
-
-function logger () {
-		setTimeout(function () {
-		console.log(dragging);
-		logger();
-		}, 1000);
-	}
-	logger();
-
-*/
 
 //---------------------------------------------------------------------------------------------------------------
 
