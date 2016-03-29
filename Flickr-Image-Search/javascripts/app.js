@@ -1,5 +1,7 @@
 "use strict";
 var isTimeoutRunning;
+var dragging = false;
+var dragData;
 
 function main () {
 	var url = "http://api.flickr.com/services/feeds/photos_public.gne?tags=";
@@ -28,33 +30,11 @@ function main () {
 	});
 
 	//Draggable Image using custom Javascript code
-		var dragImg = document.querySelector(".images img");
-		var body = document.querySelector("html");
-		var dragging = false;
-	
-	dragImg.addEventListener("mousedown", function (event) {
-		event.stopPropagation();
-		window.clearTimeout(isTimeoutRunning);
-		console.log("mousedown detected " + dragImg.clientHeight);
-		dragImg.setAttribute("id", "drag");
-		dragging = true;
-		document.addEventListener("mouseup", function documentMouseUp () {
-			console.log("mouseup detected");
-			dragging = false;
-			//reset position if not in clipboard
-			dragImg.removeAttribute("id");
-			dragImg.style.top = "";
-			dragImg.style.left = "";
-			document.removeEventListener("mouseup", documentMouseUp);
-		});
+	var dragImg = document.querySelector(".images img");
 
-	});
-	document.addEventListener("mousemove", function (event) {
-		if (dragging) {
-			dragImg.style.top = (event.clientY - dragImg.clientHeight/2) + "px";
-			dragImg.style.left = (event.clientX - dragImg.clientWidth/2) + "px";
-		}
-	})
+	enableDragging(dragImg);
+
+	//----------------------------------------------------------------------------------------
 
 	//Clipboard behavior
 	var clipboard = document.querySelector(".clipboard");
@@ -72,20 +52,25 @@ function main () {
 	clipboard.addEventListener("mouseup", function () {
 		if (dragging) {
 			clipboard.style.backgroundColor = "";
-			var src = dragImg.getAttribute("src");
+			var src = dragData.getAttribute("src");
 			var newImg = document.createElement("img");
 			newImg.setAttribute("src", src);
 			newImg.setAttribute("draggable", "false");
+			enableDragging(newImg, true);
 			clipboard.appendChild(newImg);
+			newImg.addEventListener("mousedown", function () {
+				clipboard.style.backgroundColor = "#BBCB00";
+			})
 			if (clipboard.offsetHeight < clipboard.scrollHeight) {
 				alert("Sorry, too many images!");
 				newImg.remove();
-			} else {
-				dragImg.setAttribute("src", "");
-			}
+			} 
 		}
 	});
+
 }
+
+//Utility and Helper Functions
 
 function scrollImages (cycle, obj, time) {
 	var imgsrc = document.querySelector("body img");
@@ -102,42 +87,38 @@ function scrollImages (cycle, obj, time) {
 	}, (time*1000))
 };
 
-/*
+//Enables dragging of the element passed as the argument when mouse is clicked
+//This function makes use of a global draggable boolean variable
+function enableDragging (element, deleteSelf) {
+	console.log("enableDragging called");
+	element.addEventListener("mousedown", function (event) {
+		event.stopPropagation();
+		//allow Data transfer
+		dragData = element;
+		console.log("called");
+		window.clearTimeout(isTimeoutRunning);
+		element.setAttribute("id", "drag");
+		dragging = true;
+		document.addEventListener("mouseup", function documentMouseUp () {
+			dragging = false;
+			if (deleteSelf) {
+				element.setAttribute("src", "");
+			}
+			//reset position when mouseup
+			element.removeAttribute("id");
+			element.style.top = "";
+			element.style.left = "";
+			document.removeEventListener("mouseup", documentMouseUp);
+		});
 
-function allowDrop (ev) {
-	ev.preventDefault ();
+	});
+	document.addEventListener("mousemove", function (event) {
+		if (dragging) {
+			element.style.top = (event.clientY - element.clientHeight/2) + "px";
+			element.style.left = (event.clientX - element.clientWidth/2) + "px";
+		}
+	});
 }
-
-function onDragImage (ev) {
-	ev.dataTransfer.setData("text", ev.target.currentSrc);
-}
-
-function onDrop (ev) {
-	ev.preventDefault ();
-	var data = ev.dataTransfer.getData("text");
-	var clipboard = document.querySelector(".clipboard");
-	var img = document.createElement("img");
-	var eraseImg = document.querySelector("#drag");
-	img.setAttribute("src", data);
-	img.setAttribute("draggable", "false");
-	clipboard.appendChild(img);
-	if (clipboard.offsetHeight < clipboard.scrollHeight) {
-		alert("Too many Images!");
-		img.remove();
-	} else {
-		eraseImg.setAttribute("src", "");
-	}
-}
-
-function logger () {
-		setTimeout(function () {
-		console.log(dragging);
-		logger();
-		}, 1000);
-	}
-	logger();
-
-*/
 
 //---------------------------------------------------------------------------------------------------------------
 
